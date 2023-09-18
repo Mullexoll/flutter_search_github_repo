@@ -19,23 +19,41 @@ class FavoriteScreen extends StatelessWidget {
               isFavoriteScreen: true,
               appBarTitle: 'Favorite repos list',
             ),
-            body: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: ListView.builder(
-                itemCount:
-                    (state as RepositoryLoaded).favoriteRepositories.length,
-                shrinkWrap: true,
-                itemBuilder: (ctx, idx) {
-                  return Padding(
-                    padding: const EdgeInsets.only(bottom: 8.0),
-                    child: RepositoryItem(
-                      repositoryItem: state.favoriteRepositories[idx],
-                      isFavoriteScreen: true,
+            body: (state as RepositoryLoaded).favoriteRepositories.isNotEmpty
+                ? Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: ListView.builder(
+                      itemCount: (state).favoriteRepositories.length,
+                      shrinkWrap: true,
+                      itemBuilder: (ctx, idx) {
+                        return Padding(
+                          padding: const EdgeInsets.only(bottom: 8.0),
+                          child: RepositoryItem(
+                            repositoryItem: state.favoriteRepositories[idx],
+                            isFavoriteScreen: true,
+                          ),
+                        );
+                      },
                     ),
-                  );
-                },
-              ),
-            ),
+                  )
+                : const Center(
+                    child: Center(
+                      child: Text(
+                        '''You have no favorites. 
+  Click on the star while searching to add the first favorite''',
+                        style: TextStyle(
+                          color: Color(
+                              0xFFBFBFBF), // Replace with your desired color
+                          fontFamily: "Raleway",
+                          fontSize: 14,
+                          fontStyle: FontStyle.normal,
+                          fontWeight: FontWeight.w400,
+                          height: 1.4, // 140%
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ),
           ),
         );
       },

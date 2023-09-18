@@ -59,6 +59,7 @@ class RepositoryBloc extends Bloc<RepositoryEvent, RepositoryState> {
       fetchedRepositories: List.from([]),
       favoriteRepositories: favoriteRepositories,
       repositoryHistory: searchHistory,
+      isSearchStarted: false,
     ));
   }
 
@@ -66,6 +67,7 @@ class RepositoryBloc extends Bloc<RepositoryEvent, RepositoryState> {
     PerformSearchEvent event,
     Emitter<RepositoryState> emit,
   ) async {
+    emit((state as RepositoryLoaded).copyWith(isSearchStarted: true));
     final repos = await Api.getRepositoriesWithSearchQuery(event.queryString);
 
     if (repos != null) {
@@ -88,6 +90,7 @@ class RepositoryBloc extends Bloc<RepositoryEvent, RepositoryState> {
           fetchedRepositories: repos,
           repositoryHistory:
               repositoryHistory.isEmpty ? List.from([]) : repositoryHistory,
+          isSearchStarted: false,
         ));
       }
     }
@@ -113,6 +116,7 @@ class RepositoryBloc extends Bloc<RepositoryEvent, RepositoryState> {
         fetchedRepositories: (state as RepositoryLoaded).fetchedRepositories,
         favoriteRepositories: favoriteRepositories,
         repositoryHistory: (state as RepositoryLoaded).repositoryHistory,
+        isSearchStarted: false,
       ));
     }
   }
@@ -143,6 +147,7 @@ class RepositoryBloc extends Bloc<RepositoryEvent, RepositoryState> {
       fetchedRepositories: (state as RepositoryLoaded).fetchedRepositories,
       favoriteRepositories: (state as RepositoryLoaded).favoriteRepositories,
       repositoryHistory: repositoryHistory,
+      isSearchStarted: false,
     ));
   }
 
@@ -169,6 +174,7 @@ class RepositoryBloc extends Bloc<RepositoryEvent, RepositoryState> {
         fetchedRepositories: (state as RepositoryLoaded).fetchedRepositories,
         favoriteRepositories: (state as RepositoryLoaded).favoriteRepositories,
         repositoryHistory: repositoryHistory,
+        isSearchStarted: false,
       ));
     }
   }
