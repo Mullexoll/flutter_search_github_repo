@@ -9,8 +9,8 @@ import 'package:path_provider/path_provider.dart';
 
 import '../domain/models/repository_model_item.dart';
 import '../domain/models/search_repository_history.dart';
-import '../domain/use_cases/open_isar_instance_history.use-case.dart';
-import '../domain/use_cases/open_isar_instance_repository.use-case.dart';
+import '../infrastructure/repositories/isar_instance_history.dart';
+import '../infrastructure/repositories/isar_instance_repository.dart';
 import '../infrastructure/datasource/github_repositories.api.dart';
 
 part 'repository_event.dart';
