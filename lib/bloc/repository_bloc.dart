@@ -39,11 +39,6 @@ class RepositoryBloc extends Bloc<RepositoryEvent, RepositoryState> {
       name: 'RepositoryIsarDB',
       directory: dir.path,
     );
-    // _isarHistory = await Isar.open(
-    //   [SearchRepositoryHistorySchema],
-    //   name: 'RepositoryHistoryIsarDB',
-    //   directory: dir.path,
-    // );
 
     emit(RepositoryLoading());
     await Future.delayed(const Duration(seconds: 1));
